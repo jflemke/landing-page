@@ -18,6 +18,8 @@
  * 
 */
 
+// stores all section elements of teh website.
+let sections = null;
 
 /**
  * End Global Variables
@@ -34,7 +36,28 @@
 */
 
 // build the nav
+function buildMenu() {
+    // fetch all sections at the beginning as new sections could be added dynamically
+    sections = document.getElementsByTagName('section');
 
+    const menuFragment = document.createDocumentFragment();
+    for (const section of sections) {
+        const h2 = section.querySelector('h2');
+        const id = section.id;
+        console.log(id);
+
+        const item = document.createElement('li');
+
+        const link = document.createElement('a');
+        link.href = `#${id}`;
+        link.innerText = h2.innerText;
+        link.classList.add('menu__link');
+
+        item.appendChild(link);
+        menuFragment.appendChild(item);
+    }
+    document.getElementById('navbar__list').appendChild(menuFragment);
+}
 
 // Add class 'active' to section when near top of viewport
 
@@ -45,13 +68,18 @@
 /**
  * End Main Functions
  * Begin Events
- * 
+ *
 */
 
-// Build menu 
+document.addEventListener('DOMContentLoaded', function () {
 
-// Scroll to section on link click
+    // Build menu
+    buildMenu();
 
-// Set sections as active
+    // Set sections as active
+
+    // Scroll to section on link click
+
+});
 
 
